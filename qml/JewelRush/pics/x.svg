@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.2"
+   width="48"
+   height="48"
+   id="svg2">
+  <defs
+     id="defs4">
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter3796">
+      <feGaussianBlur
+         id="feGaussianBlur3798"
+         stdDeviation="0.79189787" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-1004.3622)"
+     id="layer1">
+    <g
+       transform="translate(-11.237947,0.25253814)"
+       id="g3800">
+      <path
+         d="m 52.654943,1044.0651 -10.095386,6.3588 -7.07988,-10.5543 -6.16212,10.5543 -11.799801,-8.391 9.112069,-13.1764 -9.112069,-14.0942 11.799801,-8.391 6.16212,11.5376 7.07988,-11.5376 10.095386,6.3588 -9.439842,16.1264 9.439842,15.2086"
+         id="path2994"
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter3796);font-family:Soup of Justice;-inkscape-font-specification:Soup of Justice" />
+      <path
+         d="m 52.654943,1044.0651 -10.095386,6.3588 -7.07988,-10.5543 -6.162119,10.5543 -11.799802,-8.391 9.112069,-13.1764 -9.112069,-14.0942 11.799802,-8.391 6.162119,11.5376 7.07988,-11.5376 10.095386,6.3588 -9.439842,16.1264 9.439842,15.2086"
+         id="path2996"
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.40000001;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Soup of Justice;-inkscape-font-specification:Soup of Justice" />
+    </g>
+  </g>
+</svg>

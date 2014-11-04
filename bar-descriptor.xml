@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8' standalone='no'?>
+<qnx xmlns="http://www.qnx.com/schemas/application/1.0">
+    <id>uk.co.piggz.jewelrush</id>
+    <name>JewelRush</name>
+    <versionNumber>0.0.1</versionNumber>
+    <description>DESCRIPTION</description>
+    <copyright>COPYRIGHT</copyright>
+    <initialWindow>
+        <systemChrome>none</systemChrome>
+        <transparent>false</transparent>
+        <aspectRatio>portrait</aspectRatio>
+        <autoOrients>false</autoOrients>
+    </initialWindow>
+    <env var="QML2_IMPORT_PATH" value="app/native/runtime/qt/qml:/accounts/devuser/qt/qml:$QML2_IMPORT_PATH"/>
+    <env var="QT_PLUGIN_PATH" value="app/native/runtime/qt/plugins:/accounts/devuser/qt/plugins:$QT_PLUGIN_PATH"/>
+    <env var="LD_LIBRARY_PATH" value="app/native/runtime/qt/lib:/accounts/devuser/qt/lib:$LD_LIBRARY_PATH"/>
+    <action system="true">run_native</action>
+    <asset path="%SRC_DIR%/qml">qml</asset>
+    <author>PGZ Solutions</author>
+    <buildId>1</buildId>
+    <authorId>gYAAgMQLDfW_6efgkGbgP8dcKf8</authorId>
+    <asset path="JewelRush" entry="true" type="Qnx/Elf">JewelRush</asset>
+</qnx>

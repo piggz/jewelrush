@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.2"
+   width="200"
+   height="200"
+   id="svg2">
+  <defs
+     id="defs4">
+    <filter
+       x="-0.092665151"
+       y="-0.16844679"
+       width="1.1853303"
+       height="1.3368936"
+       color-interpolation-filters="sRGB"
+       id="filter3945">
+      <feGaussianBlur
+         id="feGaussianBlur3947"
+         stdDeviation="5.6901326" />
+    </filter>
+    <filter
+       x="-0.069449402"
+       y="-0.50086451"
+       width="1.1388988"
+       height="2.001729"
+       color-interpolation-filters="sRGB"
+       id="filter3949">
+      <feGaussianBlur
+         id="feGaussianBlur3951"
+         stdDeviation="3.9802032" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-852.3622)"
+     id="layer1">
+    <g
+       transform="matrix(1.0178272,0,0,1.0445327,-3.7006881,789.21205)"
+       id="flowRoot2985"
+       style="font-size:144px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade">
+      <path
+         d="m 76.87,158.25927 -33.12,0 0,26.352 -15.552,0 0,-81.072 48.672,0 0,54.72 m -14.544,-20.592 0,-13.392 -18.576,0 0,13.392 18.576,0"
+         id="path4007" />
+      <path
+         d="m 129.46375,184.61127 -48.528,0 0,-81.072 48.528,0 0,20.736 -33.12,0 0,39.744 17.712,0 0,-9.648 -13.248,0 0,-20.736 28.656,0 0,50.976"
+         id="path4009" />
+      <path
+         d="m 175.57075,184.61127 -43.632,0 0,-14.4 24.336,-45.936 -24.336,0 0,-20.592 43.632,0 0,15.984 -23.04,44.352 23.04,0 0,20.592"
+         id="path4011" />
+    </g>
+    <g
+       transform="matrix(1.0178272,0,0,1.0445327,-3.7006881,789.21205)"
+       id="flowRoot3769"
+       style="font-size:144px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter3945);font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade">
+      <path
+         d="m 76.87,158.25927 -33.12,0 0,26.352 -15.552,0 0,-81.072 48.672,0 0,54.72 m -14.544,-20.592 0,-13.392 -18.576,0 0,13.392 18.576,0"
+         id="path4000" />
+      <path
+         d="m 129.46375,184.61127 -48.528,0 0,-81.072 48.528,0 0,20.736 -33.12,0 0,39.744 17.712,0 0,-9.648 -13.248,0 0,-20.736 28.656,0 0,50.976"
+         id="path4002" />
+      <path
+         d="m 175.57075,184.61127 -43.632,0 0,-14.4 24.336,-45.936 -24.336,0 0,-20.592 43.632,0 0,15.984 -23.04,44.352 23.04,0 0,20.592"
+         id="path4004" />
+    </g>
+    <g
+       transform="matrix(1.0905443,0,0,1.0445327,109.19574,805.56669)"
+       id="flowRoot3777"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter3949);font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold">
+      <path
+         d="m -66.42125,193.16014 -10.784,0 0,-18.016 10.784,0 0,4.608 -7.36,0 0,8.832 3.936,0 0,-2.144 -2.944,0 0,-4.608 6.368,0 0,11.328"
+         id="path3977"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m -54.19125,193.16014 -11.712,0 5.856,-19.04 5.856,19.04 m -4.64,-4.576 -1.216,-3.968 -1.28,3.968 2.496,0"
+         id="path3979"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m -34.18375,193.16014 -3.232,0 -2.624,-8.544 -2.784,8.544 -3.072,0 -2.624,-8.544 -2.784,8.544 -3.04,0 5.824,-19.04 4.256,13.824 4.224,-13.824 5.856,19.04"
+         id="path3981"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m -23.29775,179.75214 -7.36,0 0,2.08 3.328,0 0,4.608 -6.752,0 0,-11.296 10.784,0 0,4.608 m 0,13.408 -10.784,0 0,-4.576 10.784,0 0,4.576"
+         id="path3983"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m -4.90925,193.16014 -10.944,0 0,-4.576 7.52,0 c -8.4e-6,-0.14933 -8.4e-6,-0.38399 0,-0.704 0.021325,-0.29866 0.031992,-0.53333 0.032,-0.704 -8.5e-6,-0.51199 -0.170675,-0.76799 -0.512,-0.768 l -3.744,0 c -1.045337,1e-5 -1.866669,-0.37332 -2.464,-1.12 -0.554668,-0.68266 -0.832001,-1.55732 -0.832,-2.624 l 0,-7.584 9.792,0 0,4.608 -6.368,0 0,1.504 c -4e-6,0.32001 0.08533,0.52268 0.256,0.608 0.08533,0.0214 0.341328,0.032 0.768,0.032 l 3.552,0 c 1.02399,1e-5 1.8026559,0.49068 2.336,1.472 0.4053217,0.76801 0.6079881,1.70668 0.608,2.816 l 0,7.04"
+         id="path3985"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 6.02725,179.68814 -3.392,0 0,13.472 -3.456,0 0,-13.472 -3.104,0 0,-4.608 9.952,0 0,4.608"
+         id="path3987"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 18.31325,193.19214 -11.456,0 0,-18.048 3.456,0 0,13.44 4.576,0 0,-13.44 3.424,0 0,18.048"
+         id="path3989"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 30.61675,188.87214 c -1.2e-5,1.55734 -0.181345,2.61334 -0.544,3.168 -0.469344,0.74667 -1.44001,1.12 -2.912,1.12 l -7.328,0 0,-18.016 7.328,0 c 1.47199,2e-5 2.442656,0.38402 2.912,1.152 0.362655,0.55469 0.543988,1.61068 0.544,3.168 l 0,9.408 m -3.424,-1.504 0,-6.4 c -8e-6,-0.81065 -0.330675,-1.21598 -0.992,-1.216 l -2.944,0 0,8.832 2.944,0 c 0.661325,1e-5 0.991992,-0.40533 0.992,-1.216"
+         id="path3991"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 35.10125,193.16014 -3.424,0 0,-18.016 3.424,0 0,18.016"
+         id="path3993"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 47.90925,193.19214 -11.136,0 0,-17.888 11.136,0 0,17.888 m -3.424,-4.608 0,-8.864 -4.256,0 0,8.864 4.256,0"
+         id="path3995"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 60.34075,193.16014 -10.944,0 0,-4.576 7.52,0 c -8e-6,-0.14933 -8e-6,-0.38399 0,-0.704 0.02132,-0.29866 0.03199,-0.53333 0.032,-0.704 -8e-6,-0.51199 -0.170675,-0.76799 -0.512,-0.768 l -3.744,0 c -1.045337,1e-5 -1.866669,-0.37332 -2.464,-1.12 -0.554668,-0.68266 -0.832001,-1.55732 -0.832,-2.624 l 0,-7.584 9.792,0 0,4.608 -6.368,0 0,1.504 c -4e-6,0.32001 0.08533,0.52268 0.256,0.608 0.08533,0.0214 0.341328,0.032 0.768,0.032 l 3.552,0 c 1.02399,1e-5 1.802656,0.49068 2.336,1.472 0.405322,0.76801 0.607988,1.70668 0.608,2.816 l 0,7.04"
+         id="path3997"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+    </g>
+    <g
+       transform="matrix(1.0905443,0,0,1.0445327,109.19574,805.56669)"
+       id="flowRoot2993"
+       style="font-size:32px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold">
+      <path
+         d="m -66.42125,193.16014 -10.784,0 0,-18.016 10.784,0 0,4.608 -7.36,0 0,8.832 3.936,0 0,-2.144 -2.944,0 0,-4.608 6.368,0 0,11.328"
+         id="path3954"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m -54.19125,193.16014 -11.712,0 5.856,-19.04 5.856,19.04 m -4.64,-4.576 -1.216,-3.968 -1.28,3.968 2.496,0"
+         id="path3956"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m -34.18375,193.16014 -3.232,0 -2.624,-8.544 -2.784,8.544 -3.072,0 -2.624,-8.544 -2.784,8.544 -3.04,0 5.824,-19.04 4.256,13.824 4.224,-13.824 5.856,19.04"
+         id="path3958"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m -23.29775,179.75214 -7.36,0 0,2.08 3.328,0 0,4.608 -6.752,0 0,-11.296 10.784,0 0,4.608 m 0,13.408 -10.784,0 0,-4.576 10.784,0 0,4.576"
+         id="path3960"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m -4.90925,193.16014 -10.944,0 0,-4.576 7.52,0 c -8.4e-6,-0.14933 -8.4e-6,-0.38399 0,-0.704 0.021325,-0.29866 0.031992,-0.53333 0.032,-0.704 -8.5e-6,-0.51199 -0.170675,-0.76799 -0.512,-0.768 l -3.744,0 c -1.045337,1e-5 -1.866669,-0.37332 -2.464,-1.12 -0.554668,-0.68266 -0.832001,-1.55732 -0.832,-2.624 l 0,-7.584 9.792,0 0,4.608 -6.368,0 0,1.504 c -4e-6,0.32001 0.08533,0.52268 0.256,0.608 0.08533,0.0214 0.341328,0.032 0.768,0.032 l 3.552,0 c 1.02399,1e-5 1.8026559,0.49068 2.336,1.472 0.4053217,0.76801 0.6079881,1.70668 0.608,2.816 l 0,7.04"
+         id="path3962"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 6.02725,179.68814 -3.392,0 0,13.472 -3.456,0 0,-13.472 -3.104,0 0,-4.608 9.952,0 0,4.608"
+         id="path3964"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 18.31325,193.19214 -11.456,0 0,-18.048 3.456,0 0,13.44 4.576,0 0,-13.44 3.424,0 0,18.048"
+         id="path3966"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 30.61675,188.87214 c -1.2e-5,1.55734 -0.181345,2.61334 -0.544,3.168 -0.469344,0.74667 -1.44001,1.12 -2.912,1.12 l -7.328,0 0,-18.016 7.328,0 c 1.47199,2e-5 2.442656,0.38402 2.912,1.152 0.362655,0.55469 0.543988,1.61068 0.544,3.168 l 0,9.408 m -3.424,-1.504 0,-6.4 c -8e-6,-0.81065 -0.330675,-1.21598 -0.992,-1.216 l -2.944,0 0,8.832 2.944,0 c 0.661325,1e-5 0.991992,-0.40533 0.992,-1.216"
+         id="path3968"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 35.10125,193.16014 -3.424,0 0,-18.016 3.424,0 0,18.016"
+         id="path3970"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 47.90925,193.19214 -11.136,0 0,-17.888 11.136,0 0,17.888 m -3.424,-4.608 0,-8.864 -4.256,0 0,8.864 4.256,0"
+         id="path3972"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+      <path
+         d="m 60.34075,193.16014 -10.944,0 0,-4.576 7.52,0 c -8e-6,-0.14933 -8e-6,-0.38399 0,-0.704 0.02132,-0.29866 0.03199,-0.53333 0.032,-0.704 -8e-6,-0.51199 -0.170675,-0.76799 -0.512,-0.768 l -3.744,0 c -1.045337,1e-5 -1.866669,-0.37332 -2.464,-1.12 -0.554668,-0.68266 -0.832001,-1.55732 -0.832,-2.624 l 0,-7.584 9.792,0 0,4.608 -6.368,0 0,1.504 c -4e-6,0.32001 0.08533,0.52268 0.256,0.608 0.08533,0.0214 0.341328,0.032 0.768,0.032 l 3.552,0 c 1.02399,1e-5 1.802656,0.49068 2.336,1.472 0.405322,0.76801 0.607988,1.70668 0.608,2.816 l 0,7.04"
+         id="path3974"
+         style="fill:#ffffff;font-family:Anglepoise Lampshade;-inkscape-font-specification:Anglepoise Lampshade Bold" />
+    </g>
+  </g>
+</svg>

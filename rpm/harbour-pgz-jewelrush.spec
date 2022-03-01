@@ -19,7 +19,6 @@ Group:      Games/Action
 License:    GPL v2
 URL:        http://www.piggz.co.uk
 Source0:    %{name}-%{version}.tar.bz2
-Source100:  harbour-pgz-jewelrush.yaml
 Requires:   qt5-qtdeclarative-import-sensors
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -27,10 +26,31 @@ BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(qdeclarative5-boostable)
 BuildRequires:  pkgconfig(Qt5Svg)
 BuildRequires:  desktop-file-utils
+BuildRequires:  sailfishsilica-qt5
 
 %description
-Jewel Rush Puzzle Game
+A simple to learn, addictive, action packed puzzle game.  Simply match the colours together, then blow them up!
+The more you score the harder it gets.
 
+%if "%{?vendor}" == "chum"
+PackageName: Jewel Rush
+Type: desktop-application
+DeveloperName: Adam Pigg
+Categories:
+ - Game
+Custom:
+  Repo: https://github.com/piggz/jewelrush
+Icon: https://raw.githubusercontent.com/piggz/galaxy-attack-hd/master/galaxy-attack-128.png
+Screenshots:
+ - https://raw.githubusercontent.com/piggz/jewelrush/main/media/screenshot_main.jpg
+ - https://raw.githubusercontent.com/piggz/jewelrush/main/media/screenshot_help.jpg
+ - https://raw.githubusercontent.com/piggz/jewelrush/main/media/screenshot_game.jpg
+Url:
+  Homepage: https://github.com/piggz/jewelrush
+  Help: https://github.com/piggz/jewelrush/discussions
+  Bugtracker: https://github.com/piggz/jewelrush/issues
+  Donation: https://www.paypal.me/piggz
+%endif
 
 %prep
 %setup -q -n %{name}-%{version}

@@ -4,6 +4,7 @@ target.path = /usr/bin
 
 # Add more folders to ship with the application, here
 folder_01.source = qml/JewelRush
+folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
 
 QT += svg
@@ -29,7 +30,7 @@ HEADERS += \
     android/jni/includes/WhispersyncClientInterface.h \
     nulliap.h
 
-exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
+exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml") || exists("/usr/lib64/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     message(SailfishOS build)
     DEFINES += MER_EDITION_SAILFISH
     #Tablet

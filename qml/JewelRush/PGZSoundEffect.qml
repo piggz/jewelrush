@@ -10,20 +10,24 @@ Item {
     Audio {
         id: buffer1
         source: pgzSoundEffect.source
+        volume: optSfxVolume
     }
 
     Audio {
         id: buffer2
         source: pgzSoundEffect.source
+        volume: optSfxVolume
     }
 
     Audio {
         id: buffer3
         source: pgzSoundEffect.source
+        volume: optSfxVolume
     }
     Audio {
         id: buffer4
         source: pgzSoundEffect.source
+        volume: optSfxVolume
     }
 
     function play() {

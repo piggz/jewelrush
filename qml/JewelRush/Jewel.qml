@@ -1,4 +1,5 @@
-import QtQuick 2.2
+import QtQuick 2.0
+import QtQuick.Particles 2.0
 
 Item {
     id:jewel
@@ -22,44 +23,6 @@ Item {
     Behavior on y {
         NumberAnimation { duration: 100 }
     }
-/*
-    onXChanged: {
-        moving = true;
-        moveTimer.restart();
-    }
-    onYChanged: {
-        moving = true;
-        moveTimer.restart();
-    }
-
-    Timer {
-        id: moveTimer
-        repeat: false
-        interval: 200
-        onTriggered: {
-            moving = false;
-        }
-    }
-*/
-
-    /*
-    XAnimator{
-        target: jewel
-        duration: 100
-        to: jewelPositionX(jewel.xpos)
-        from: jewel.x
-        running: true
-    }
-
-    YAnimator {
-        target: jewel
-        duration: 100
-        to: jewelPositionY(jewel.ypos)
-        from: jewel.y
-        running: true
-    }*/
-
-
 
     function reset() {
         exploding = false;
@@ -77,18 +40,15 @@ Item {
         }
     }
 
-    Explosion {
-        id: myExplosion
-        anchors.centerIn: parent
-        width: parent.width * 3
-        height: width
-        color: jewel.color
+    //Foreground particles
+    BlockEmitter {
+        jewel: jewel
+        id: particles
+        system: gameBoard.particleSystem
+        group: color
+        anchors.fill: parent
+        enabled: false
 
-        onComplete: {
-            if (destroyOnExplosion) {
-                jewel.destroy();
-            }
-        }
     }
 
     AnimatedSprite {
@@ -96,23 +56,11 @@ Item {
         visible: bomb
         anchors.fill: parent
         source: "pics/inner_bomb.png"
-        frameCount: 16
-        frameSync: false
+        frameCount: 12
         frameWidth: 256
         frameHeight: 128
-        frameRate: 15
-        loops: AnimatedSprite.Infinite
-        running: true
+        running: gameBoard.gameState === "RUNNING"
         opacity: 0.6
-
-        onCurrentFrameChanged: {
-            if (currentFrame === 29) {
-                reverse = true;
-            }
-            if (currentFrame === 0) {
-                reverse = false;
-            }
-        }
     }
 
     function jewelPositionX(indexX) {
@@ -124,10 +72,14 @@ Item {
     }
 
     function explode(doe) {
+        particles.enabled = true;
         exploding = true;
-        myExplosion.play();
+        particles.pulse(100);
         imgJewel.opacity = 0;
         destroyOnExplosion = doe
+        if (doe){
+            jewel.destroy(500);
+        }
     }
 
 }

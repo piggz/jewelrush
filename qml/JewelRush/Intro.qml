@@ -5,7 +5,7 @@ Rectangle {
 
     property bool onScreen: false;
     opacity: onScreen ? 1 : 0
-    visible: opacity > 0;
+    visible: opacity > 0.2;
     Behavior on opacity {
         NumberAnimation {duration: 400}
     }
@@ -67,6 +67,8 @@ Rectangle {
         running:  true
 
         onTriggered: {
+            console.log("Timer intro");
+
             txtLoading.state = "HIDDEN"
             imgStudio.state = "HIDDEN"
         }

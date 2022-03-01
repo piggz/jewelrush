@@ -2,7 +2,6 @@ var jewelComponent;
 var jewel1;
 var jewel2;
 
-var jewelEvent;
 var leftEvent;
 var rightEvent;
 var downEvent;
@@ -14,13 +13,17 @@ var animateDelay;
 function initialise()
 {
     jewelComponent = Qt.createComponent("Jewel.qml");
-    jewelEvent = false;
     leftEvent = false;
     rightEvent = false;
     downEvent = false;
     rotateEvent = false;
     boardArray = createArray(6, 12);
     animateDelay = 0;
+
+    gameBoard.nextJewel1Color = pickColour();
+    gameBoard.nextJewel1Type = pickBomb();
+    gameBoard.nextJewel2Color = pickColour();
+    gameBoard.nextJewel2Type = pickBomb();
 }
 
 function cmdStartNewGame()
@@ -31,7 +34,6 @@ function cmdStartNewGame()
     gameBoard.score = 0;
     gameBoard.level = 1;
 
-    jewelEvent = false
     leftEvent = false;
     rightEvent = false;
     downEvent = false;
@@ -41,6 +43,10 @@ function cmdStartNewGame()
     clearBoardArray();
     delete jewel1;
     delete jewel2;
+    gameBoard.nextJewel1Color = pickColour();
+    gameBoard.nextJewel1Type = pickBomb();
+    gameBoard.nextJewel2Color = pickColour();
+    gameBoard.nextJewel2Type = pickBomb();
 }
 
 function cmdRunning()
@@ -61,7 +67,6 @@ function cmdPause()
     gameBoard.slideMessage("Paused");
     desaturate.desaturation = 1;
     music.pause();
-
 }
 
 function cmdResume()
@@ -73,37 +78,41 @@ function cmdResume()
 }
 
 function cmdDead() {
-    gameState = "DEAD";
-    desaturate.desaturation = 1;
+    if (gameState !== "DEAD") {
+        gameState = "DEAD";
+        desaturate.desaturation = 1;
 
-    music.stop();
-    sndSad.play();
-    gameBoard.slideMessage("Game Over");
-    gameBoard.level = 1;
+        music.stop();
+        playSoundEffect("sad");
+        gameBoard.slideMessage("Game Over");
+
+        gameBoard.dead();
+    }
 }
 
 
 function mainEvent() {
-
     if (gameState === "RUNNING") {
-        console.time("mainEvent");
-        if (jewelEvent) {
-            moveJewels();
-            jewelEvent = false;
-            checkAllLanded();
-        }
-        //console.time("mainEvent.1");
-        handleUserInput();
-        //console.timeEnd("mainEvent.1");
+        gameBoard.mainTicks++;
 
-        //console.time("mainEvent.2");
-        checkAllLanded();
-        //console.timeEnd("mainEvent.2");
+        if (animateDelay > 0)  {
+            animateDelay--;
+            return;
+        }
+
+        //console.log(gameBoard.mainTicks, gameBoard.jewelEvent);
+        if (gameBoard.mainTicks >= gameBoard.jewelEvent) {
+            gameBoard.mainTicks = 0;
+            checkAllLanded();
+            moveJewels();
+        } else {
+            handleUserInput();
+        }
+
+
 
         if (!checkFalling() && /*!jewelsMoving()*/ animateDelay === 0) {
-            //console.time("mainEvent.3");
             explodeCheck();
-            //console.timeEnd("mainEvent.3");
 
             if (checkIfDead()) {
                 cmdDead();
@@ -111,16 +120,13 @@ function mainEvent() {
                 dropNewJewels();
             }
         }
-        //console.timeEnd("mainEvent");
-        if (animateDelay > 0)  {
-            animateDelay--;
-        }
+
+
     }
 }
 
 function jewelsMoving()
 {
-
     var moving = false;
     var jewel;
     for (var i = 0; i < board.children.length; ++i) {
@@ -135,44 +141,48 @@ function jewelsMoving()
 }
 
 function scheduleJewelEvent() {
-    jewelEvent = !leftEvent && !rightEvent && !downEvent && !rotateEvent;
+    //jewelEvent = !leftEvent && !rightEvent && !downEvent && !rotateEvent;
 }
 
 function scheduleLeftEvent() {
-    leftEvent = !rightEvent && !downEvent && !jewelEvent && !rotateEvent;
+    leftEvent = !rightEvent && !downEvent && !rotateEvent;
 }
 
 function scheduleRightEvent() {
-    rightEvent = !leftEvent && !downEvent && !jewelEvent && !rotateEvent;
+    rightEvent = !leftEvent && !downEvent && !rotateEvent;
 }
 
 function scheduleDownEvent() {
-    downEvent = !leftEvent && !rightEvent && !jewelEvent && !rotateEvent;
+    downEvent = !leftEvent && !rightEvent && !rotateEvent;
 }
 
 function scheduleRotateEvent() {
-    rotateEvent = !leftEvent && !rightEvent && !jewelEvent && !downEvent;
+    rotateEvent = !leftEvent && !rightEvent && !downEvent;
 }
 
 function handleUserInput() {
     if (leftEvent) {
         leftPressed()
         leftEvent = false;
+        return;
     }
 
     if (rightEvent) {
         rightPressed()
         rightEvent = false;
+        return;
     }
 
     if (downEvent) {
         downPressed()
         downEvent = false;
+        return;
     }
 
     if (rotateEvent) {
         spacePressed();
         rotateEvent = false;
+        return;
     }
 }
 
@@ -193,8 +203,14 @@ function moveJewels()
 
 function dropNewJewels()
 {
-    jewel1 = jewelComponent.createObject(board, {"xpos": 2, "ypos": -1, "falling": true, "color" : pickColour(), "bomb" : pickBomb()});
-    jewel2 = jewelComponent.createObject(board, {"xpos": 2, "ypos": -2, "falling": true, "color" : pickColour(), "bomb" : pickBomb()});
+    jewel1 = jewelComponent.createObject(board, {"xpos": 2, "ypos": -1, "falling": true, "color" : gameBoard.nextJewel1Color, "bomb" : gameBoard.nextJewel1Type});
+    jewel2 = jewelComponent.createObject(board, {"xpos": 2, "ypos": -2, "falling": true, "color" : gameBoard.nextJewel2Color, "bomb" : gameBoard.nextJewel2Type});
+
+    gameBoard.nextJewel1Color = pickColour();
+    gameBoard.nextJewel1Type = pickBomb();
+    gameBoard.nextJewel2Color = pickColour();
+    gameBoard.nextJewel2Type = pickBomb();
+
 }
 
 function checkAllLanded()
@@ -214,6 +230,9 @@ function checkAllLanded()
     } else {
         jewel1.falling = !checkLanded(jewel1.xpos, jewel1.ypos);
         jewel2.falling = !checkLanded(jewel2.xpos, jewel2.ypos);
+    }
+    if (!jewel1.falling || !jewel2.falling) {
+        downPressed();
     }
 }
 
@@ -235,10 +254,14 @@ function leftPressed()
         return;
     }
 
+    if (!jewel1.falling || !jewel2.falling) {
+        return;
+    }
+
     if (jewel1.ypos === jewel2.ypos) { //in same row
         var minx = jewel1.xpos < jewel2.xpos ? jewel1.xpos : jewel2.xpos;
         if (minx > 0 && !isJewelAtPosition(minx - 1, jewel1.ypos)) { //can move
-            sndRotate.play();
+            playSoundEffect("rotate");
 
             moveJewel(jewel1, jewel1.xpos-1, jewel1.ypos);
             moveJewel(jewel2, jewel2.xpos-1, jewel2.ypos);
@@ -246,7 +269,7 @@ function leftPressed()
         }
     } else { // in same column
         if (jewel1.xpos > 0 && !isJewelAtPosition(jewel1.xpos - 1, jewel1.ypos) && !isJewelAtPosition(jewel2.xpos - 1, jewel2.ypos)) { //can move
-            sndRotate.play();
+            playSoundEffect("rotate");
 
             moveJewel(jewel1, jewel1.xpos-1, jewel1.ypos);
             moveJewel(jewel2, jewel2.xpos-1, jewel2.ypos);
@@ -258,37 +281,44 @@ function spacePressed()
 {
     var pos2 = positionOfJewel2();
 
+    if (!jewel1.falling || !jewel2.falling) {
+        return;
+    }
+
     switch(pos2) {
     case 1: //Jewel 2 above
         if (!isJewelAtPosition(jewel2.xpos + 1, jewel2.ypos) && !isJewelAtPosition(jewel2.xpos + 1, jewel2.ypos + 1)) {
             moveJewel(jewel2, jewel2.xpos + 1, jewel2.ypos + 1);
-            sndRotate.play();
+            playSoundEffect("rotate");
         } else if (!isJewelAtPosition(jewel1.xpos - 1, jewel1.ypos)) {
             moveJewel(jewel2, jewel1.xpos, jewel1.ypos);
             moveJewel(jewel1, jewel2.xpos - 1, jewel1.ypos);
-            sndRotate.play();
+            playSoundEffect("rotate");
         }
         break;
     case 2: //Jewel 2 right
         if (!isJewelAtPosition(jewel2.xpos, jewel2.ypos + 1) && !isJewelAtPosition(jewel2.xpos - 1, jewel2.ypos + 1)) {
             moveJewel(jewel2, jewel2.xpos - 1, jewel2.ypos + 1);
-            sndRotate.play();
+            playSoundEffect("rotate");
+
         }
         break;
     case 3: //Jewel 2 below
         if (!isJewelAtPosition(jewel2.xpos - 1, jewel2.ypos) && !isJewelAtPosition(jewel2.xpos - 1, jewel2.ypos - 1)) {
             moveJewel(jewel2, jewel2.xpos - 1, jewel2.ypos - 1);
-            sndRotate.play();
+            playSoundEffect("rotate");
         } else if (!isJewelAtPosition(jewel1.xpos + 1, jewel1.ypos)) {
             moveJewel(jewel2, jewel1.xpos, jewel1.ypos);
             moveJewel(jewel1, jewel2.xpos + 1, jewel1.ypos);
-            sndRotate.play();
+            playSoundEffect("rotate");
+
         }
         break;
     case 4: //Jewel 2 left
         if (!isJewelAtPosition(jewel2.xpos, jewel2.ypos - 1) && !isJewelAtPosition(jewel2.xpos + 1, jewel2.ypos - 1)) {
             moveJewel(jewel2, jewel2.xpos + 1, jewel2.ypos - 1)
-            sndRotate.play();
+            playSoundEffect("rotate");
+
         }
         break;
     default:
@@ -301,17 +331,22 @@ function rightPressed()
     if (jewel1 === undefined || jewel2 === undefined) {
         return;
     }
+
+    if (!jewel1.falling || !jewel2.falling) {
+        return;
+    }
+
     if (jewel1.ypos === jewel2.ypos) { //in same row
         var maxx = jewel1.xpos > jewel2.xpos ? jewel1.xpos : jewel2.xpos;
         if (maxx < 5 && !isJewelAtPosition(maxx + 1, jewel1.ypos)) { //can move
-            sndRotate.play();
+            playSoundEffect("rotate");
 
             moveJewel(jewel1, jewel1.xpos+1, jewel1.ypos);
             moveJewel(jewel2, jewel2.xpos+1, jewel2.ypos);
         }
     } else { // in same column
         if (jewel1.xpos < 5 && !isJewelAtPosition(jewel1.xpos + 1, jewel1.ypos) && !isJewelAtPosition(jewel2.xpos + 1, jewel2.ypos)) { //can move
-            sndRotate.play();
+            playSoundEffect("rotate");
 
             moveJewel(jewel1, jewel1.xpos+1, jewel1.ypos);
             moveJewel(jewel2, jewel2.xpos+1, jewel2.ypos);
@@ -326,32 +361,38 @@ function downPressed()
     }
 
     var dropPos = 0;
+    var playThud = false;
 
     if (jewel1.ypos>jewel2.ypos) {
         if (jewel1.falling) {
             dropPos = dropYpos(jewel1.xpos, jewel1.ypos);
             moveJewel(jewel1, jewel1.xpos, dropPos);
             jewel1.falling = false;
-            sndThud.play();
+            playThud = true;
         }
         if (jewel2.falling) {
             dropPos = dropYpos(jewel2.xpos, jewel2.ypos);
             moveJewel(jewel2, jewel2.xpos, dropPos);
             jewel2.falling = false;
+            playThud = true;
         }
     } else {
         if (jewel2.falling) {
             dropPos = dropYpos(jewel2.xpos, jewel2.ypos);
             moveJewel(jewel2, jewel2.xpos, dropPos);
             jewel2.falling = false;
-            sndThud.play();
+            playThud = true;
         }
         if (jewel1.falling) {
             dropPos = dropYpos(jewel1.xpos, jewel1.ypos);
             moveJewel(jewel1, jewel1.xpos, dropPos);
             jewel1.falling = false;
+            playThud = true;
         }
+    }
 
+    if (playThud) {
+        playSoundEffect("thud");
     }
 }
 
@@ -404,7 +445,16 @@ function pickColour()
 //1 in 5
 function pickBomb()
 {
-    var b = Math.floor((Math.random()*5)+1);
+    var numBlocks = board.children.length;
+    var chance = 5;
+
+    if (numBlocks > 48) {
+        chance = 3;
+    } else if (numBlocks > 36) {
+        chance = 4;
+    }
+
+    var b = Math.floor((Math.random()*chance)+1);
     return b == 1;
 }
 
@@ -447,7 +497,7 @@ function explodeCheck()
             }
 
             if (explode) {
-                sndExplosion.play();
+                playSoundEffect("explosion");
                 var numExplode = 0;
                 numExplode = explodeJewel(jewel.xpos, jewel.ypos, jewel.color, 0);
                 gameBoard.score += Math.pow(numExplode, 2) + gameBoard.level;
@@ -480,8 +530,9 @@ function explodeJewel(xpos, ypos, c, n)
 
     if (!(j === undefined)) {
         j.explode(true);
-        animateDelay = 10;
-        delete boardArray[j.xpos][j.ypos];
+        animateDelay = 1;
+        delete boardArray[xpos][ypos];
+        boardArray[xpos][ypos] = undefined;
         n++;
     }
 
@@ -575,11 +626,12 @@ function moveJewel(jewel, tox, toy) {
     if (jewel === undefined) {
         return;
     }
-    delete boardArray[jewel.xpos][jewel.ypos];
+    //delete boardArray[jewel.xpos][jewel.ypos];
+    boardArray[jewel.xpos][jewel.ypos] = undefined;
 
     jewel.xpos = tox;
     jewel.ypos = toy;
-    animateDelay = 10;
+    animateDelay = 1;
 
     boardArray[tox][toy] = jewel;
 }
@@ -650,5 +702,37 @@ function positionOfJewel2()
         return 4;
     } else {
         return 0; //errro
+    }
+}
+
+function playSoundEffect(effect)
+{
+    if (PlatformID === 4 || PlatformID === 8 || PlatformID === 5) { //ANDROID/SAILFISH/DESKTOP
+        if (effect === "thud") {
+            sndThud.play();
+            return;
+        }
+        if (effect === "rotate") {
+            sndRotate.play();
+            return;
+        }
+        if (effect === "explosion") {
+            sndExplosion.play();
+            return;
+        }
+        if (effect === "getready") {
+            sndGetReady.play();
+            return;
+        }
+        if (effect === "go") {
+            sndGo.play();
+            return;
+        }
+        if (effect === "sad") {
+            sndSad.play();
+            return;
+        }
+    } else { //QtAudioEngine Available
+        audioengine.sounds[effect].play();
     }
 }

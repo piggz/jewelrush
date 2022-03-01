@@ -7,17 +7,30 @@ Item {
     property int textSize: gameBoard.height * 0.05
     property int duration: 750
 
+    Rectangle {
+        id: rectBackground
+        width: theText.width
+        height: theText.height
+
+        color: "black"
+        opacity: 0.5
+        radius: 5
+    }
+
     Text {
         id: theText
         font.pixelSize: textSize
         color: "white"
         font.bold: true
+        horizontalAlignment: Text.AlignHCenter
         font.family: gameFont.name
         style: Text.Outline
         styleColor: "black"
+        anchors.centerIn: rectBackground
     }
 
-    function show(message) {
+    function show(message, background) {
+        rectBackground.visible = background;
         theText.text = message;
         animateMessage.restart();
     }

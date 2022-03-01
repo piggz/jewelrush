@@ -7,7 +7,7 @@ Image {
 
     id: closebutton
 
-    source: "pics/x.svg"
+    source: "pics/btnClose.png"
     height: width
 
     anchors.right: parent.right

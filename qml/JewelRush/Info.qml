@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Layouts 1.1
+//import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 
 import "logic.js" as Logic
@@ -9,9 +9,9 @@ Rectangle {
     signal exitClicked();
     property bool onScreen: false;
     opacity: onScreen ? 1 : 0
-    visible: opacity > 0;
+    visible: opacity > 0.2;
     Behavior on opacity {
-        NumberAnimation {duration: 400}
+        NumberAnimation {duration: 200}
     }
 
     Image {
@@ -51,6 +51,7 @@ Rectangle {
             xpos: 2
             ypos: -1
         }
+
         Jewel {
             id: jewel2
             color: "green"
@@ -135,7 +136,7 @@ Tap to view tutorial
     }
 
     function slideMessage(message) {
-        slideText.show(message);
+        slideText.show(message, false);
     }
 
     function inititalise() {

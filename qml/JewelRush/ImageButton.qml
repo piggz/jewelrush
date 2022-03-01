@@ -15,8 +15,8 @@ Item {
         z: 1
         height: parent.height
         radius: height/2
-        border.width: 5
-        width: txt.width + height + radius
+        border.width: height * 0.06
+        width: txt.width + height + radius + 10
         opacity: 0.5
         MouseArea {
             id: txtStartArea
@@ -40,6 +40,7 @@ Item {
         height: parent.height
         width: height
         source: image
+        visible: parent.image !== ""
 
         Rectangle {
             anchors.centerIn: parent
@@ -69,10 +70,13 @@ Item {
     Text {
         id: txt
         z: 3
-        x: imgButton.height + 10
+        x: parent.image !== "" ? imgButton.height + 10 : 10
         anchors.verticalCenter: rectBackground.verticalCenter
-        font.pixelSize: parent.height - 40
+        font.pixelSize: parent.height * 0.6
         text: imgButton.text
+        font.family: gameFont.name
+        style: Text.Outline
+        color: "white"
     }
 
 

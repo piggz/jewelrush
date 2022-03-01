@@ -3,10 +3,11 @@ import QtMultimedia 5.0
 
 Rectangle {
     id: root
-    width: 480
-    height: 960
-
     focus: true
+
+    property real optSfxVolume :0.4
+    property real optMusicVolume: 0.7
+    property bool optAdFreeBought: false
 
     //Intro Panel
     Intro {
@@ -22,7 +23,10 @@ Rectangle {
 
         onStartClicked: {
             gameBoard.onScreen = true;
-            gameBoard.cmdStartNewGame();
+
+            if (gameBoard.gameState !== "PAUSED") {
+                gameBoard.cmdStartNewGame();
+            }
         }
 
         onSettingsClicked: {
@@ -40,6 +44,17 @@ Rectangle {
 
         onExitClicked: {
             quitGame();
+        }
+
+        onScoreloopClicked: {
+            if (!GameCircle.showGameCircle()) {
+                slideMessage2("GameCircle is not available\nPlease exit and connect to the\nInternet", true);
+            }
+        }
+
+        onBuyClicked: {
+            //IAP.purchaseItem("android.test.purchased");
+            IAP.purchaseItem("uk.co.piggz.jewelrush.sku_noads");
         }
     }
 
@@ -64,6 +79,24 @@ Rectangle {
 
     }
 
+    SettingsBoard {
+        id: settingsBoard
+        anchors.fill: parent
+
+        onExitClicked: {
+            settingsBoard.onScreen = false
+        }
+    }
+
+    HiScoreBoard {
+        id: hiScoreBoard
+        anchors.fill: parent
+
+        onExitClicked: {
+            hiScoreBoard.onScreen = false
+        }
+    }
+
     //Hide intro window timer
     Timer {
         repeat: false
@@ -71,6 +104,8 @@ Rectangle {
         running: true
 
         onTriggered: {
+            console.log("Timer hide intro");
+
             introWindow.onScreen = false;
             startWindow.onScreen = true;
             startWindow.show();
@@ -79,7 +114,21 @@ Rectangle {
         }
     }
 
-    Keys.onLeftPressed: {
+    //Advert timer
+    Timer {
+        id: tmrAd
+        repeat: true
+        running: false
+        interval: 30000
+
+        onTriggered : {
+            console.log("Timer advert");
+
+            Helper.showAdvert();
+        }
+    }
+
+   Keys.onLeftPressed: {
         gameBoard.leftPressed();
     }
 
@@ -102,18 +151,21 @@ Rectangle {
             } else {
                 gameBoard.cmdPause();
             }
+            event.accpeted = true;
         }
-    }
 
-    function quitGame(){
-        Qt.quit();
+        if (event.key === Qt.Key_Back) {
+            console.log ("Back Pressed");
+            handleBackButton();
+            event.accepted = true;
+        }
     }
 
     Connections {
         target: Viewer
         onWindowStateChanged: {
-            console.log("State Changed:", windowState);
-            if (state === 1) { //minimized
+            console.log("Window State Changed:", windowState);
+            if (windowState === 1 && gameBoard.gameState === "RUNNING") { //minimized
                 gameBoard.cmdPause();
             }
         }
@@ -123,49 +175,148 @@ Rectangle {
         target: App
         onApplicationStateChanged: {
             console.log("App state Changed:", state);
-            if (state === 2 || state === 4) { //inactive or suspended
+            if ((state === 0 || state === 1 || state === 2) && gameBoard.gameState === "RUNNING") { //suspended, hidden or inactive
                 gameBoard.cmdPause();
             }
         }
     }
 
-    PGZSoundEffect {
+    SoundEffect {
         id: sndExplosion
         source: "sounds/explosion.wav"
+        volume: optSfxVolume
     }
-    PGZSoundEffect {
+    SoundEffect {
         id: sndRotate
         source: "sounds/rotate.wav"
+        volume: optSfxVolume
     }
-    PGZSoundEffect {
+    SoundEffect {
         id: sndThud
         source: "sounds/thud.wav"
+        volume: optSfxVolume
     }
-
-    Audio {
+    SoundEffect {
         id: sndGetReady
         source: "sounds/getready.wav"
-
+        volume: optSfxVolume
     }
-    Audio {
+    SoundEffect {
         id: sndGo
         source: "sounds/go.wav"
-
+        volume: optSfxVolume
     }
-    Audio {
+    SoundEffect {
         id: sndSad
         source: "sounds/sad.wav"
-
+        volume: optSfxVolume
     }
 
     FontLoader {
-            id: gameFont
-            source: "Floraless.ttf"
+        id: gameFont
+        source: "Floraless.ttf"
      }
 
     Audio {
         id: music
         source: "sounds/music.mp3"
         loops: Audio.Infinite
+        volume: optMusicVolume
+    }
+
+    PGZSlideText {
+        id: slideText
+        anchors.verticalCenter: parent.verticalCenter;
+        textSize: gameBoard.height * 0.03
+        duration: 2500
+    }
+
+    function slideMessage(message) {
+        slideText.show(message, false);
+    }
+
+    function slideMessage2(message, background) {
+        slideText.show(message, background);
+    }
+
+    Component.onCompleted: {
+        startup();
+    }
+
+    function startup() {
+        loadSettings();
+        checkPurchases();
+    }
+
+    function checkPurchases() {
+        console.log("QML: checkPurchases");
+        if (IAP.checkItemPurchased("uk.co.piggz.jewelrush.sku_noads")) {
+            console.log("No Ads Purchased");
+            optAdFreeBought = true;
+        }
+
+        saveSettings();
+        //tmrAd.running = !optAdFreeBought;
+    }
+
+    function quitGame() {
+        saveSettings();
+        ScoreModel.saveScores();
+        Qt.quit();
+    }
+
+    function loadSettings(){
+        optSfxVolume = Helper.getSetting("SFXVolume", 0.4);
+        optMusicVolume = Helper.getSetting("MusicVolume", 0.7);
+        optAdFreeBought = Helper.getBoolSetting("optAdFreeBought", false);
+    }
+
+    function saveSettings() {
+        Helper.setSetting("SFXVolume", optSfxVolume);
+        Helper.setSetting("MusicVolume", optMusicVolume);
+        Helper.setSetting("optAdFreeBought", optAdFreeBought);
+    }
+
+    function handleBackButton() {
+        if (gameBoard.onScreen) {
+            gameBoard.backClicked();
+            gameBoard.onScreen = false;
+            return;
+        }
+        if (settingsBoard.onScreen) {
+            settingsBoard.exitClicked();
+            return;
+        }
+        if (infoBoard.onScreen) {
+            infoBoard.exitClicked();
+            return;
+        }
+        if (hiScoreBoard.onScreen) {
+            hiScoreBoard.exitClicked();
+            return;
+        }
+
+        quitGame();
+    }
+
+    Connections {
+        target: IAP
+        onItemPurchased: {
+            console.log("Item Name:", itemName, " Purchase State: ", purchaseState);
+
+            if (itemName === "uk.co.piggz.jewelrush.sku_noads" && purchaseState === 0) {
+                slideMessage("Thank you!\nRe-open the game to remove ads");
+                optAdFreeBought = true;
+            } else if (purchaseState === 7) { //already purchased
+                slideMessage("Thanks, but you dont need to\nbuy again!\nRe-open the game to remove ads");
+                optAdFreeBought = true;
+            } else {
+                slideMessage("Removing ads failed");
+                optAdFreeBought = false;
+            }
+            saveSettings();
+        }
     }
 }
+
+

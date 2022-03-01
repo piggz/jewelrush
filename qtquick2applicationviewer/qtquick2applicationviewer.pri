@@ -179,6 +179,11 @@ android-no-sdk {
         INSTALLS += $$item
     }
 
+        icon.files =$${TARGET}.png
+        icon.path = /usr/share/icons/hicolor/86x86/apps
+        desktopfile.files = $${TARGET}.desktop
+        desktopfile.path = /usr/share/applications
+
     !isEmpty(desktopfile.path) {
         export(icon.files)
         export(icon.path)

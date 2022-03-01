@@ -5,9 +5,13 @@
 #include <QPointF>
 #include <QLineF>
 
-#if defined(Q_OS_ANDROID)
+#if defined(Q_OS_ANDROID) || defined(SAILFISHOS)
 #include <QScreen>
 #include <QGuiApplication>
+#endif
+
+#if defined(Q_OS_ANDROID)
+#include <QtAndroidExtras/QAndroidJniObject>
 #endif
 
 Q_DECLARE_METATYPE(QList<QObject*>)
@@ -111,6 +115,9 @@ int Helper::mmToPixels(int mm)
     qDebug() << "DPI is" << QGuiApplication::primaryScreen()->physicalDotsPerInch();
     qDebug() << "Converting " << mm << "mm to " << (mm*QGuiApplication::primaryScreen()->physicalDotsPerInch()) / 25.4 << "px";
     return (mm*QGuiApplication::primaryScreen()->physicalDotsPerInch()) / 25.4;
+#elif defined(MER_EDITION_SAILFISH)
+    qDebug() << "Converting " << mm << " to " << (mm*MER_PPI) / 25.4;
+    return (mm*MER_PPI) / 25.4;
 #else
     qDebug() << "Converting " << mm << "mm to " << (mm * mPPI) / 25.4 << "px";
     return (mm*mPPI) / 25.4;
@@ -325,3 +332,11 @@ int Helper::linesIntersect( long x1, long y1,  long x2, long y2, long x3, long y
 
     return ( DO_INTERSECT );
 } /* lines_intersect */
+
+void Helper::showAdvert()
+{
+#ifdef Q_OS_ANDROID
+    QAndroidJniObject::callStaticMethod<void>("uk/co/piggz/jewelrush/JewelRushActivity","showAd");
+#endif
+}
+

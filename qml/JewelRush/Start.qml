@@ -12,6 +12,7 @@ Rectangle {
     signal buyClicked
 
     property int selectedItem: 0
+    property bool adsEnabled: true
 
     property bool onScreen: false;
     opacity: onScreen ? 1 : 0
@@ -35,16 +36,18 @@ Rectangle {
         //starttimer3.start();
     }
 
-    Timer {
+/*    Timer {
         id: starttimer3
         repeat:  false
         interval: 1000
         running: false
         onTriggered: {
+            console.log("Timer start");
+
             animButtonShow.start();
         }
     }
-
+*/
     CloseButton {
         id: closebutton
 
@@ -55,22 +58,23 @@ Rectangle {
 
     Image {
         id: imgLogo
-        source: "pics/logo.png"
+        source: "pics/logo2.png"
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.margins: 5
-        width: parent.width - 40
-        height: width * 0.6
+        fillMode: Image.PreserveAspectFit
+        width: parent.width
+        height: parent.height / 4
     }
 
-    Item {
+    Column {
         id: buttonArea
         anchors.top: imgLogo.bottom
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        property int buttonHeight: (height - 30*children.length) / children.length
-
+        property int buttonHeight: (height - ((height * 0.04) * (children.length + 3))) / children.length + 2
+        spacing: height * 0.04
 
         //Start button
         ImageButton {
@@ -80,11 +84,9 @@ Rectangle {
 
             anchors.left: parent.left
             anchors.leftMargin:80
-            anchors.top: parent.top
-            anchors.topMargin: 0
 
-            image: "pics/start.png"
-            text: "Play"
+            image: "pics/btnPlay.png"
+            text: gameBoard.gameState === "PAUSED" ? "Resume" : "Play"
             highlighed: selectedItem === 1
 
             onClicked: {
@@ -99,12 +101,9 @@ Rectangle {
             id: buttonOptions
             height: parent.buttonHeight
             opacity: 0
-
             anchors.left: buttonStart.left
-            anchors.top: buttonStart.bottom
-            anchors.topMargin: 30
 
-            image: "pics/options.png"
+            image: "pics/btnSettings.png"
             text: "Options"
             highlighed: selectedItem === 2
 
@@ -119,12 +118,9 @@ Rectangle {
             id: buttonHiScore
             height: parent.buttonHeight
             opacity: 0
-
             anchors.left: buttonStart.left
-            anchors.top: buttonOptions.bottom
-            anchors.topMargin: 30
 
-            image: "pics/hiscore.png"
+            image: "pics/btnScores.png"
             text: "Scores"
             highlighed: selectedItem === 3
 
@@ -133,18 +129,16 @@ Rectangle {
             }
         }
 
-        //Scoreloop button
+        //Gamecircle button
         ImageButton {
             id: buttonScoreLoop
             height: parent.buttonHeight
             opacity: 0
-
+            visible: PlatformID === 4
             anchors.left: buttonStart.left
-            anchors.top: buttonHiScore.bottom
-            anchors.topMargin: 30
 
-            image: "pics/scoreloop.png"
-            text: "Scoreloop"
+            image: "pics/btnGameCircle.png"
+            text: "Gamecircle"
             highlighed: selectedItem === 4
 
             onClicked: {
@@ -157,12 +151,10 @@ Rectangle {
             id: buttonInfo
             height: parent.buttonHeight
             opacity: 0
-
             anchors.left: buttonStart.left
-            anchors.top: buttonScoreLoop.bottom
-            anchors.topMargin: 30
 
-            image: "pics/info.png"
+
+            image: "pics/btnInfo.png"
             text: "Info"
             highlighed: selectedItem === 5;
 
@@ -176,21 +168,14 @@ Rectangle {
             id: buttonPlay
             height: parent.buttonHeight
             opacity: 0
-
             anchors.left: buttonStart.left
-            anchors.top: buttonInfo.bottom
-            anchors.topMargin: 30
-
-            image:"pics/play_store.png"
+            visible: PlatformID === 4 || PlatformID === 7
+            image: imageForStoreButton()
             text: "More Apps"
             highlighed: selectedItem === 7;
 
             onClicked: {
-                if (GOOGLE_IAP) {
-                    Qt.openUrlExternally("market://search?q=pub:Adam Pigg");
-                } else {
-                    Qt.openUrlExternally("http://www.amazon.com/gp/mas/dl/android?p=uk.co.piggz.pgz_spaceinvaders&showAll=1");
-                }
+                openStore();
             }
         }
 
@@ -199,22 +184,18 @@ Rectangle {
             id: buttonBuy
             height: parent.buttonHeight
             opacity: 0
-            //visible: !optFullGameBought
-
+            visible: PlatformID === 4 && !optAdFreeBought
 
             anchors.left: buttonStart.left
-            anchors.top: buttonPlay.bottom
-            anchors.topMargin: 30
 
-            image: "pics/buy_full_game.png"
-            text: "Unlock"
+            image: "pics/btnBuy.png"
+            text: "Donate/Go Ad Free!"
             highlighed: selectedItem === 6;
 
             onClicked: {
                 buyClicked();
             }
         }
-
     }
 
     Image {
@@ -232,11 +213,11 @@ Rectangle {
         NumberAnimation { target: buttonStart; property: "opacity"; easing.type: Easing.Linear; to: 1; duration: 150 }
         NumberAnimation { target: buttonOptions; property: "opacity"; easing.type: Easing.Linear; to: 1; duration: 150 }
         NumberAnimation { target: buttonHiScore; property: "opacity"; easing.type: Easing.Linear; to: 1; duration: 150 }
-        NumberAnimation { target: buttonScoreLoop; property: "opacity"; easing.type: Easing.Linear; to: 1; duration: 150 }
+        NumberAnimation { target: buttonScoreLoop; property: "opacity"; easing.type: Easing.Linear; to: 1; duration: buttonScoreLoop.visible ? 150 : 0 }
         NumberAnimation { target: buttonInfo; property: "opacity"; easing.type: Easing.Linear; to: 1; duration: 150 }
-        NumberAnimation { target: buttonPlay; property: "opacity"; easing.type: Easing.Linear; to: 1; duration: 150 }
-        NumberAnimation { target: buttonBuy; property: "opacity"; easing.type: Easing.Linear; to: 1; duration: 150 }
-
+        NumberAnimation { target: buttonPlay; property: "opacity"; easing.type: Easing.Linear; to: 1; duration: buttonPlay.visible ? 150 : 0  }
+        NumberAnimation { target: buttonBuy; property: "opacity"; easing.type: Easing.Linear; to: 1; duration: buttonBuy.visible ? 150 : 0  }
+        ScriptAction { script: finalStartup() }
     }
 
     function rightPressed() {
@@ -271,6 +252,38 @@ Rectangle {
             infoClicked();
             break;
         }
+    }
+
+    function imageForStoreButton() {
+        if (PlatformID === 4) {
+            return ANDROID_MARKET === "GOOGLE" ? "pics/btnPlayStore.png" : "pics/btnAmazonApps.png"
+        } else if (PlatformID === 7) {
+            return "pics/btnBlackberryWorld.png"
+        }
+        return "";
+    }
+
+    function openStore() {
+        if (PlatformID === 4) {
+            if (ANDROID_MARKET === "GOOGLE") {
+                Qt.openUrlExternally("market://search?q=pub:Adam Pigg");
+            } else {
+                Qt.openUrlExternally("amzn://apps/android?s=uk.co.piggz&showAll=1");
+            }
+        } else if (PlatformID === 7) {
+            Qt.openUrlExternally("https://appworld.blackberry.com/webstore/vendor/35052/");
+        }
+    }
+
+    function finalStartup()
+    {
+        //Submit the highest score if connected to GameCircle
+        if (PlatformID === 4) {
+            if (GameCircle.agsReady()){
+                GameCircle.submitScore("jewelrush_leaderboard_0", gameBoard.score);
+            }
+        }
+        console.log(gameBoard.gameState);
     }
 
 }

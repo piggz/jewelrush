@@ -50,6 +50,7 @@ public slots:
     bool lineCircleCollision(float lx1, float ly1, float lx2, float ly2, float cx, float cy, float radius);
     int linesIntersect( long x1, long y1,  long x2, long y2, long x3, long y3, long x4, long y4 );
     bool lineRectangleCollision(float rectX, float rectY, float rectWidth, float rectHeight, float x1, float y1,  float x2, float y2);
+    void showAdvert();
 
 private:
     QSettings settings;
